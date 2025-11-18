@@ -4,11 +4,12 @@ import { EquipoService } from '../../services/equipo-service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Paginador } from "../paginador/paginador";
 
 @Component({
   selector: 'app-equipo-component',
   standalone: true,
-  imports: [CommonModule ,RouterModule],
+  imports: [CommonModule, RouterModule, Paginador],
   templateUrl: './equipo-component.html',
   styleUrl: './equipo-component.css',
 })
