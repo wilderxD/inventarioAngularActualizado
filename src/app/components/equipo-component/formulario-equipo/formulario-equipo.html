@@ -1,0 +1,38 @@
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+   <li *ngFor="let err of errores" class="mx-2">{{ err }}</li>
+</ul>
+
+<div class="card bg-dark text-white mt-3">
+   <div class="card-header">{{ titulo }}</div>
+   <div class="card-body">
+      <form #equipoForm="ngForm">
+         <div class="form-group row mb-1">
+            <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
+            <div class="col-sm-6">
+               <input type="text" class="form-control" [(ngModel)]="equipo.descripcion" name="descripcion" #descripcion="ngModel">
+               <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                  <div *ngIf="descripcion.errors?.['required']">
+                     La descripcion es obligatoria.
+                  </div>
+                  <div *ngIf="descripcion.errors?.['minLength']">
+                     La descripcion debe tener al menos 3 caracteres.
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="form-group row mb-1">
+            <label for="moneda" class="col-form-label col-sm-2">Moneda</label>
+            <div class="col-sm-6">
+               <select [compareWith]="compararMoneda" class="form-select" [(ngModel)]="equipo.moneda" name="moneda" style="width: 500px;">
+                  <option [ngValue]="undefined">--- Seleccione un tipo de moneda ---</option>
+                  <option *ngFor="let moneda of monedas" [ngValue]="moneda">{{ moneda.descripcion }}</option>
+               </select>
+            </div>
+         </div>
+
+         
+
+      </form>
+   </div>
+</div>
