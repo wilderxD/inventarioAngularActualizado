@@ -9,12 +9,12 @@
                </a>
             </div>
             <div>
-               <button class="btn btn-secondary me-2" (click)="exportarPDF()">
+               <button class="btn btn-secondary me-2" (click)="descargarReporte('pdf')">
                   <i class="fas fa-file-pdf me-2"></i>Exportar PDF
                </button>
             </div>
             <div>
-               <button class="btn btn-success" (click)="exportarExcel()">
+               <button class="btn btn-success" (click)="descargarReporte('excel')">
                   <i class="fas fa-file-excel me-2"></i>Exportar Excel
                </button>
             </div>
@@ -39,13 +39,13 @@
                      <td>{{ equipo.estado?.descripcion }}</td>
                      <td>
                         <div class="btn-group " role="group">
-                           <a class="btn btn-info btn-sm m-1" [routerLink]="['/verEquipo', equipo.id]">
+                           <a class="btn btn-info btn-sm m-1" (click)="abrirModal(equipo)">
                               <i class="fas fa-eye"></i>
                            </a>
-                           <a class="btn btn-warning btn-sm m-1" [routerLink]="['/formularioEquipo', equipo.id]">
+                           <a class="btn btn-warning btn-sm m-1" [routerLink]="['/listarEquipo/form/', equipo.id]">
                               <i class="fas fa-edit"></i>
                            </a>
-                           <button class="btn btn-danger btn-sm m-1" (click)="delete()">
+                           <button type="button" name="eliminar" class="btn btn-danger btn-sm m-1" (click)="delete(equipo)">
                               <i class="fas fa-trash"></i>
                            </button>
                         </div>

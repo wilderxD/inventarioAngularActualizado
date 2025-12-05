@@ -49,6 +49,7 @@ export class FormularioEquipo implements OnInit{
   }
 
   public create(): void{
+    this.equipo.descripcion = this.equipo.descripcion?.toUpperCase();
     this._equipoService.create(this.equipo).subscribe(
       equipo => {
         this._router.navigate(['/listarEquipo']),

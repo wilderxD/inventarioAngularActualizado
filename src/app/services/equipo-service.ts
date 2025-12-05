@@ -106,8 +106,13 @@ export class EquipoService {
     );
   }
 
-  exportarPDF(){//: Observable<Blob>
-    //return this._http.get();
+  exportarReportes(formato: string): Observable<Blob>{//: Observable<Blob>
+    const urlExportar = `${this.urlEndPoint}/exportar?formato=${formato}`;
+    return this._http.get(urlExportar, {responseType: 'blob'}).pipe(
+      catchError(e => {
+        console.error(`Error al exportar en formato ${formato}: `, e);
+        return throwError(() => e);
+      })
+    );
   }
-
 }

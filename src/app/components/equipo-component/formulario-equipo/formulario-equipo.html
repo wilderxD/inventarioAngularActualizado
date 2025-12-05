@@ -1,4 +1,4 @@
-<div style="margin-left: 400px; margin-right: 400px;">
+<div style="margin-left: 20%; margin-right: 20%;">
    <ul class="alert alert-danger" *ngIf="errores.length > 0">
       <li *ngFor="let err of errores" class="mx-2">{{ err }}</li>
    </ul>
@@ -25,7 +25,7 @@
             <div class="form-group row mb-1">
                <label for="moneda" class="col-form-label col-sm-2">Moneda</label>
                <div class="col-sm-6">
-                  <select [compareWith]="compararMoneda" class="form-select" [(ngModel)]="equipo.moneda" name="moneda" style="width: 400px;">
+                  <select [compareWith]="compararMoneda" class="form-select" [(ngModel)]="equipo.moneda" name="moneda" style="width: 100%;">
                      <option [ngValue]="undefined">--- Seleccione un tipo de moneda ---</option>
                      <option *ngFor="let moneda of monedas" [ngValue]="moneda">{{ moneda.descripcion }}</option>
                   </select>
@@ -49,7 +49,7 @@
             <div class="form-group row mb-1">
                <label for="categoria" class="col-form-label col-sm-2">Categoria</label>
                <div class="col-sm-6">
-                  <select [compareWith]="compararCategoria" class="form-select" [(ngModel)]="equipo.categoria" name="categoria" style="width: 400px;">
+                  <select [compareWith]="compararCategoria" class="form-select" [(ngModel)]="equipo.categoria" name="categoria" style="width: 100%;">
                      <option [ngValue]="undefined">--- Seleccione una categoria---</option>
                      <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{ categoria.descripcion }}</option>
                   </select>
@@ -59,7 +59,7 @@
              <div class="form-group row mb-1">
                <label for="estado" class="col-form-label col-sm-2">Estado</label>
                <div class="col-sm-6">
-                  <select [compareWith]="compararEstado" class="form-select" [(ngModel)]="equipo.estado" name="estado" style="width: 400px;">
+                  <select [compareWith]="compararEstado" class="form-select" [(ngModel)]="equipo.estado" name="estado" style="width: 100%;">
                      <option [ngValue]="undefined">--- Seleccione un estado---</option>
                      <option *ngFor="let estado of estados" [ngValue]="estado">{{ estado.descripcion }}</option>
                   </select>

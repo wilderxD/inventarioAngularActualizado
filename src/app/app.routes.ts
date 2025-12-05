@@ -8,13 +8,14 @@ import { CargamasivaComponent } from './components/cargamasiva-component/cargama
 import { DbComponent } from './components/db-component/db-component';
 import { AsignadosComponent } from './components/asignados-component/asignados-component';
 import { FormularioEquipo } from './components/equipo-component/formulario-equipo/formulario-equipo';
+import { ModalEquipoComponent } from './components/equipo-component/modal-equipo-component/modal-equipo-component';
 
 export const routes: Routes = [
    { path: 'inicio', component: InicioComponents},
    { path: 'listarEquipo', component: EquipoComponent},
    { path: 'equipos/page/:page', component: EquipoComponent },
    { path: 'listarEquipo/form', component: FormularioEquipo},
-   { path: 'listarEquipo/form/:id', component: FormularioEquipo},
+   { path: 'listarEquipo/form/:id', component: FormularioEquipo},   
    { path: 'listarUsuarios', component: AdministracionComponent },
    { path: 'listarInventario', component: InventarioComponent },
    { path: 'recursos', component: RecursosComponent },
