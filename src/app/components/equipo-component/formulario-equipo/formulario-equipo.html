@@ -1,38 +1,88 @@
-<ul class="alert alert-danger" *ngIf="errores.length > 0">
-   <li *ngFor="let err of errores" class="mx-2">{{ err }}</li>
-</ul>
+<div style="margin-left: 400px; margin-right: 400px;">
+   <ul class="alert alert-danger" *ngIf="errores.length > 0">
+      <li *ngFor="let err of errores" class="mx-2">{{ err }}</li>
+   </ul>
 
-<div class="card bg-dark text-white mt-3">
-   <div class="card-header">{{ titulo }}</div>
-   <div class="card-body">
-      <form #equipoForm="ngForm">
-         <div class="form-group row mb-1">
-            <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
-            <div class="col-sm-6">
-               <input type="text" class="form-control" [(ngModel)]="equipo.descripcion" name="descripcion" #descripcion="ngModel">
-               <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
-                  <div *ngIf="descripcion.errors?.['required']">
-                     La descripcion es obligatoria.
-                  </div>
-                  <div *ngIf="descripcion.errors?.['minLength']">
-                     La descripcion debe tener al menos 3 caracteres.
+   <div class="card bg-dark text-white mt-3">
+      <div class="card-header">{{ titulo }}</div>
+      <div class="card-body">
+         <form #equipoForm="ngForm">
+            <div class="form-group row mb-1">
+               <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
+               <div class="col-sm-6">
+                  <input type="text" class="form-control" [(ngModel)]="equipo.descripcion" name="descripcion" #descripcion="ngModel">
+                  <div class="alert alert-danger" *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                     <div *ngIf="descripcion.errors?.['required']">
+                        La descripcion es obligatoria.
+                     </div>
+                     <div *ngIf="descripcion.errors?.['minLength']">
+                        La descripcion debe tener al menos 3 caracteres.
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
 
-         <div class="form-group row mb-1">
-            <label for="moneda" class="col-form-label col-sm-2">Moneda</label>
-            <div class="col-sm-6">
-               <select [compareWith]="compararMoneda" class="form-select" [(ngModel)]="equipo.moneda" name="moneda" style="width: 500px;">
-                  <option [ngValue]="undefined">--- Seleccione un tipo de moneda ---</option>
-                  <option *ngFor="let moneda of monedas" [ngValue]="moneda">{{ moneda.descripcion }}</option>
-               </select>
+            <div class="form-group row mb-1">
+               <label for="moneda" class="col-form-label col-sm-2">Moneda</label>
+               <div class="col-sm-6">
+                  <select [compareWith]="compararMoneda" class="form-select" [(ngModel)]="equipo.moneda" name="moneda" style="width: 400px;">
+                     <option [ngValue]="undefined">--- Seleccione un tipo de moneda ---</option>
+                     <option *ngFor="let moneda of monedas" [ngValue]="moneda">{{ moneda.descripcion }}</option>
+                  </select>
+               </div>
             </div>
-         </div>
+            <div class="form-group row mb-1">
+               <label for="valor" class="col-form-label col-sm-2">Valor</label>
+               <div class="col-sm-6">
+                  <input type="number" min="0" class="form-control" [(ngModel)]="equipo.valor" name="valor" #valor="ngModel">
+                  <div class="alert alert-danger" *ngIf="valor.invalid && (valor.dirty || valor.touched)">
+                     <div *ngIf="valor.errors?.['required']">
+                        La descripcion es obligatoria.
+                     </div>
+                     <div *ngIf="valor.errors?.['minLength']">
+                        La descripcion debe tener al menos 3 caracteres.
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+            <div class="form-group row mb-1">
+               <label for="categoria" class="col-form-label col-sm-2">Categoria</label>
+               <div class="col-sm-6">
+                  <select [compareWith]="compararCategoria" class="form-select" [(ngModel)]="equipo.categoria" name="categoria" style="width: 400px;">
+                     <option [ngValue]="undefined">--- Seleccione una categoria---</option>
+                     <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{ categoria.descripcion }}</option>
+                  </select>
+               </div>
+            </div>
 
-         
+             <div class="form-group row mb-1">
+               <label for="estado" class="col-form-label col-sm-2">Estado</label>
+               <div class="col-sm-6">
+                  <select [compareWith]="compararEstado" class="form-select" [(ngModel)]="equipo.estado" name="estado" style="width: 400px;">
+                     <option [ngValue]="undefined">--- Seleccione un estado---</option>
+                     <option *ngFor="let estado of estados" [ngValue]="estado">{{ estado.descripcion }}</option>
+                  </select>
+               </div>
+            </div>
 
-      </form>
+            <div class="form-group row mb-2">
+               <label for="detalle" class="col-sm-2 col-form-label">Detalles</label>
+               <div class="col-sm-6">
+                  <textarea class="form-control" name="observacion" [(ngModel)]="equipo.detalle"></textarea>
+               </div>
+            </div>
+
+            <div class="form-group row">
+               <div class="col-sm-6">
+                  <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!equipo.id else elseBlock" [disabled]="!equipoForm.form.valid">Crear</button>
+                  <ng-template #elseBlock>
+                     <button class="btn btn-primary" role="button" (click)="update()" [disabled]="!equipoForm.form.valid">Editar</button>
+                  </ng-template>                  
+               </div>
+            </div>
+
+         </form>
+      </div>
    </div>
 </div>

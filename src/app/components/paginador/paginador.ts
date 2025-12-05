@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 export class Paginador implements OnInit, OnChanges{
 
    @Input() paginador: any;
-   paginas?: number[];
+   paginas: number[] = [];
    desde?: number;
    hasta?: number;
 

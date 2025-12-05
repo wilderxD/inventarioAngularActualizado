@@ -99,7 +99,7 @@ export class EquipoService {
   }
 
   getEstados(): Observable<Estado[]>{
-    return this._http.get<Estado[]>(this.urlEndPoint + '/asignados').pipe(
+    return this._http.get<Estado[]>(this.urlEndPoint + '/estados').pipe(
       catchError( e => {
         return throwError(() => e);
       })

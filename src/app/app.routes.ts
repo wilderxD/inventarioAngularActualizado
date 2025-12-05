@@ -12,7 +12,9 @@ import { FormularioEquipo } from './components/equipo-component/formulario-equip
 export const routes: Routes = [
    { path: 'inicio', component: InicioComponents},
    { path: 'listarEquipo', component: EquipoComponent},
+   { path: 'equipos/page/:page', component: EquipoComponent },
    { path: 'listarEquipo/form', component: FormularioEquipo},
+   { path: 'listarEquipo/form/:id', component: FormularioEquipo},
    { path: 'listarUsuarios', component: AdministracionComponent },
    { path: 'listarInventario', component: InventarioComponent },
    { path: 'recursos', component: RecursosComponent },
