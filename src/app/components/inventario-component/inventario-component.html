@@ -1,1 +1,56 @@
-<p>inventario-component works!</p>
+<app-modal-inventario-component *ngIf="inventarioSeleccionado" [inventario]="inventarioSeleccionado"></app-modal-inventario-component>
+
+<div class="container-fluid py-4 cuerpo">
+   <div class="card">
+      <div class="card-header bg-primary text-white">{{ titulo }}</div>
+      <div class="card-body">
+         <div class="d-flex justify-content-between mb-4">            
+            <div>
+               <button class="btn btn-secondary me-2" (click)="descargarReporte('pdf')">
+                  <i class="fas fa-file-pdf me-2"></i>Exportar PDF
+               </button>
+            </div>
+            <div>
+               <button class="btn btn-success" (click)="descargarReporte('excel')">
+                  <i class="fas fa-file-excel me-2"></i>Exportar Excel
+               </button>
+            </div>
+         </div>
+
+         <div class="table-responsive">
+            <table class="table table-striped table-hover">
+               <thead class="table-dark">
+                  <tr>
+                     <th>ID</th>
+                     <th>Descripción</th>
+                     <th>Categoria</th>
+                     <th>Status</th>     
+                     <th>Acciones</th>                
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let equipo of equipos">
+                     <td>{{ equipo.id }}</td>
+                     <td>{{ equipo.descripcion }}</td>
+                     <td>{{ equipo.categoria?.descripcion || 'SIN CATEGORIA' }}</td>
+                     <td>{{ equipo.estado?.descripcion }}</td>
+                     <td>
+                        <div class="btn-group " role="group">
+                           <a class="btn btn-info btn-sm m-1" (click)="abrirModal(equipo)">
+                              <i class="fas fa-eye"></i>
+                           </a>                          
+                           <button type="button" name="eliminar" class="btn btn-danger btn-sm m-1" (click)="delete(equipo)">
+                              <i class="fas fa-trash"></i>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+
+         <app-paginador-inventario *ngIf="paginador" [paginador]="paginador"></app-paginador-inventario>
+
+      </div>
+   </div>
+</div>

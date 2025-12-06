@@ -1,3 +1,5 @@
+<app-modal-equipo-component *ngIf="equipoSeleccionado" [equipo]="equipoSeleccionado"></app-modal-equipo-component>
+
 <div class="container-fluid py-4 cuerpo">
    <div class="card">
       <div class="card-header bg-primary text-white">{{ titulo }}</div>
@@ -8,6 +10,15 @@
                   <i class="fas fa-plus me-2"></i>Agregar Equipo
                </a>
             </div>
+            
+            <div class="d-flex align-items-center">
+               <span class="me-2 text-muted fw-bold">Filtrar por estado:</span>
+               <select [(ngModel)]="estadoSeleccionado" (change)="filtrarPorEstado(estadoSeleccionado)" class="form-select" style="min-width: 150px;">
+                  <option *ngFor="let estado of estadosFiltro" [value]="estado">{{ estado }}</option>
+               </select>
+            </div>
+            
+
             <div>
                <button class="btn btn-secondary me-2" (click)="descargarReporte('pdf')">
                   <i class="fas fa-file-pdf me-2"></i>Exportar PDF

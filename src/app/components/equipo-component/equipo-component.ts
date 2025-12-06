@@ -7,11 +7,13 @@ import { CommonModule } from '@angular/common';
 import { Paginador } from "../paginador/paginador";
 import Swal from 'sweetalert2';
 import { ModalService } from '../../services/modal-service';
+import { ModalEquipoComponent } from "./modal-equipo-component/modal-equipo-component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-equipo-component',
   standalone: true,
-  imports: [CommonModule, RouterModule, Paginador],
+  imports: [CommonModule, RouterModule, Paginador, ModalEquipoComponent, FormsModule],
   templateUrl: './equipo-component.html',
   styleUrl: './equipo-component.css',
 })
@@ -21,12 +23,22 @@ export class EquipoComponent implements OnInit{
   titulo: string = "Gestion de Equipos";
   paginador: any;
   equipoSeleccionado?: Equipo;
+  estadosFiltro: string[] = ['TODOS', 'SIN ASIGNAR', 'EN REPARACION', 'DADO DE BAJA', 'ASIGNADO', 'VENDIDO'];
+  estadoSeleccionado: string = 'TODOS';
 
   constructor(
     private _equipoService: EquipoService,
     private _activatedRoute: ActivatedRoute,
     public _modalService: ModalService
   ){}
+
+  cargarEquipos(page: number, estado: string): void {
+      this._equipoService.getEquipos(page, estado) // Usamos el nuevo servicio
+          .subscribe(response => {
+              this.equipos = response.content as Equipo[];
+              this.paginador = response;
+          });
+  }
 
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe(params => {
@@ -36,25 +48,19 @@ export class EquipoComponent implements OnInit{
         page = 0;
       }
 
-      this._equipoService.getEquipos(page).pipe(
-        tap(response => {
-          console.log('EquipoConponent: tap2'),
-          (response.content as Equipo[]).forEach(equipo => {
-            console.log(equipo.descripcion);
-          });
-        })
-      )
-      .subscribe(response => {
-        this.equipos = response.content as Equipo[]
-        this.paginador = response;
-      })
-    });
+      this.cargarEquipos(page, this.estadoSeleccionado)
+  });
 
     this._modalService.notificarUpload.subscribe( equipo => {
       this.equipos = this.equipos.map( equipoOriginal => {
         return equipoOriginal;
       })
     });
+  }
+
+  filtrarPorEstado(estado: string): void {
+      this.estadoSeleccionado = estado;      
+      this.cargarEquipos(0, estado); 
   }
 
   delete(equipo: Equipo): void{

@@ -19,8 +19,16 @@ export class EquipoService {
     private _router: Router
   ){}
 
-  getEquipos(page: number): Observable<any>{
-    return this._http.get(this.urlEndPoint + '/page/' + page).pipe(
+  getEquipos(page: number, estadoFiltro: string | null = null): Observable<any>{
+
+    let url = this.urlEndPoint + '/page/' + page;
+
+    if (estadoFiltro && estadoFiltro !== 'TODOS') {
+        url += `?estado=${estadoFiltro}`;
+    }
+
+
+    return this._http.get(url).pipe(
       tap((response: any) => {
         console.log("Equipos Service: tap 1");
       (response.content as Equipo[]).forEach( equipo => {
